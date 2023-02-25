@@ -1,5 +1,7 @@
 # Skillscapade, the gamified learning platform
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0a4a9566-e3f8-4c4f-9245-f44d6bff7f76/deploy-status)](https://app.netlify.com/sites/skillscapade/deploys)
+
 Skillscapade[^1] is a cutting-edge software platform that transforms traditional learning into an immersive and gamified experience. With Skillscapade, users can create engaging "learning tracts" that teach people new skills in a unique and exciting way.
 
 Whether you're an individual looking to upskill, or a company looking to train your employees, Skillscapade has got you covered. Our platform is user-friendly and customizable, allowing you to design tailored learning experiences that align with your goals and objectives.
