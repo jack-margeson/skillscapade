@@ -1,8 +1,16 @@
 <router-outlet>
-  <p>Skillscapade home</p>
+  <!-- <p>Skillscapade home</p> -->
+  <div>
+    <mat-toolbar color="primary">
+      <span>Skillscapade</span>
+    </mat-toolbar>
+  </div>
+  <div class="center">
+    <span class="title">Skillscapade</span>
 
-  <a href="/dashboard" mat-fab extended>
-    <mat-icon>home</mat-icon>
-    Visit dashboard
-  </a>
+    <a href="/dashboard" mat-fab extended style="max-width: 200px">
+      <mat-icon>home</mat-icon>
+      Visit dashboard
+    </a>
+  </div>
 </router-outlet>
