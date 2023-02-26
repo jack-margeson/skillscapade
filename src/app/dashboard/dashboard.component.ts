@@ -19,6 +19,11 @@ export class DashboardComponent implements OnInit {
   isShowing = false;
   showSubSubMenu: boolean = false;
 
+  isDashboard: boolean = false;
+  isProfile: boolean = true;
+
+  tracts: Array<any> = [];
+
   constructor(
     private authenticationService: AuthenticationService,
     private databaseService: DatabaseService
@@ -31,6 +36,12 @@ export class DashboardComponent implements OnInit {
           this.userDisplayName = data.prefered_name;
           this.userPoints = data.points;
         });
+    });
+    this.databaseService.getTractsObservable().subscribe((tracts: any) => {
+      this.tracts = [];
+      tracts.forEach((tract: any) => {
+        this.tracts.push(tract);
+      });
     });
   }
 
@@ -53,6 +64,16 @@ export class DashboardComponent implements OnInit {
   mouseleave() {
     if (!this.isExpanded) {
       this.isShowing = false;
+    }
+  }
+
+  switch(option: string): void {
+    if (option == 'dashboard') {
+      this.isDashboard = true;
+      this.isProfile = false;
+    } else {
+      this.isDashboard = false;
+      this.isProfile = true;
     }
   }
 }

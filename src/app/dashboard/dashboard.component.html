@@ -31,129 +31,74 @@
       (mouseleave)="mouseleave()"
     >
       <mat-nav-list>
-        <mat-list-item
-          (click)="showSubmenu = !showSubmenu"
-          class="parent center"
-        >
+        <mat-list-item (click)="switch('profile')" class="parent center">
+          <mat-icon mat-list-icon fix-icons>person</mat-icon>
+
+          <span class="full-width fix-text" *ngIf="isExpanded || isShowing"
+            >User Profile</span
+          >
+        </mat-list-item>
+        <mat-list-item (click)="switch('dashboard')" class="parent center">
           <mat-icon mat-list-icon fix-icons>home</mat-icon>
 
           <span class="full-width fix-text" *ngIf="isExpanded || isShowing"
-            >Parent Menu</span
-          >
-
-          <mat-icon
-            class="menu-button fix-icons"
-            [ngClass]="{ rotated: showSubmenu }"
-            *ngIf="isExpanded || isShowing"
-            >expand_more</mat-icon
+            >Learning Tracks Dashboard</span
           >
         </mat-list-item>
-        <div
-          class="submenu"
-          [ngClass]="{ expanded: showSubmenu }"
-          *ngIf="isShowing || isExpanded"
-        >
-          <a mat-list-item href="...">Submenu Item 1</a>
-          <a mat-list-item href="...">Submenu Item 2</a>
-          <mat-list-item
-            (click)="showSubSubMenu = !showSubSubMenu"
-            class="parent"
-          >
-            <span class="full-width" *ngIf="isExpanded || isShowing"
-              >Nested Menu</span
-            >
-            <mat-icon
-              class="menu-button"
-              [ngClass]="{ rotated: showSubSubMenu }"
-              *ngIf="isExpanded || isShowing"
-              >expand_more</mat-icon
-            >
-          </mat-list-item>
-          <div
-            class="submenu"
-            [ngClass]="{ expanded: showSubSubMenu }"
-            *ngIf="isShowing || isExpanded"
-          >
-            <mat-list-item>SubSubmenu Item 1</mat-list-item>
-            <mat-list-item>SubSubmenu Item 2</mat-list-item>
-          </div>
-        </div>
       </mat-nav-list>
-      <mat-nav-list> </mat-nav-list>
     </mat-sidenav>
 
-    <div class="sidenav-content">
-      <mat-card class="example-card">
+    <div *ngIf="isProfile">
+      <div class="profile-container">
+        <p class="profile-title">Welcome, {{ this.userDisplayName }}!</p>
+        <p style="padding-top: 20px; font-size: 30px; padding-bottom: 20px">
+          {{ this.userDisplayName }}'s points: {{ this.userPoints }}
+        </p>
+
+        <button (click)="logout()" mat-fab extended style="max-width: 400px">
+          <mat-icon>logout</mat-icon>
+          Logout
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="isDashboard" class="sidenav-content">
+      <mat-card
+        *ngFor="let tract of tracts; index as i; first as isFirst"
+        class="example-card"
+      >
         <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+          <div
+            mat-card-avatar
+            class="example-header-image"
+            style="background-image: url({{ tract.author_picture }});"
+          ></div>
+          <mat-card-title>{{ tract.title }}</mat-card-title>
+          <mat-card-subtitle>by {{ tract.author }}</mat-card-subtitle>
         </mat-card-header>
-        <img
-          mat-card-image
-          src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-          alt="Photo of a Shiba Inu"
-        />
+        <img mat-card-image src="{{ tract.image }}" alt="" />
         <mat-card-content>
           <p style="padding-top: 10px">
-            The Shiba Inu is the smallest of the six original and distinct spitz
-            breeds of dog from Japan. A small, agile dog that copes very well
-            with mountainous terrain, the Shiba Inu was originally bred for
-            hunting.
+            {{ tract.description }}
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
+          <button mat-button>START</button>
         </mat-card-actions>
       </mat-card>
       <mat-card class="example-card">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+          <mat-card-title>Add learning tract</mat-card-title>
+          <mat-card-subtitle
+            >Add your own learning tract to Skillscapade!</mat-card-subtitle
+          >
         </mat-card-header>
         <img
           mat-card-image
-          src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Plus_symbol.svg/500px-Plus_symbol.svg.png"
           alt="Photo of a Shiba Inu"
         />
-        <mat-card-content>
-          <p style="padding-top: 10px">
-            The Shiba Inu is the smallest of the six original and distinct spitz
-            breeds of dog from Japan. A small, agile dog that copes very well
-            with mountainous terrain, the Shiba Inu was originally bred for
-            hunting.
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
-      </mat-card>
-      <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-        </mat-card-header>
-        <img
-          mat-card-image
-          src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-          alt="Photo of a Shiba Inu"
-        />
-        <mat-card-content>
-          <p style="padding-top: 10px">
-            The Shiba Inu is the smallest of the six original and distinct spitz
-            breeds of dog from Japan. A small, agile dog that copes very well
-            with mountainous terrain, the Shiba Inu was originally bred for
-            hunting.
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
       </mat-card>
     </div>
   </mat-sidenav-container>

@@ -11,9 +11,11 @@ import { map } from 'rxjs/operators';
 })
 export class DatabaseService {
   usersCollection: AngularFirestoreCollection<any>;
+  tractsCollection: AngularFirestoreCollection<any>;
 
   constructor(private angularFirestore: AngularFirestore) {
     this.usersCollection = angularFirestore.collection('users');
+    this.tractsCollection = angularFirestore.collection('tracts');
   }
 
   addNewUser(
@@ -66,5 +68,9 @@ export class DatabaseService {
       .collection('users', (ref) => ref.where('uid', '==', uid))
       .valueChanges()
       .pipe(map((queryResponse: any) => queryResponse[0]));
+  }
+
+  getTractsObservable(): Observable<Object> {
+    return this.angularFirestore.collection('tracts').valueChanges();
   }
 }
