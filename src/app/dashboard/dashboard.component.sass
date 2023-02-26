@@ -1,0 +1,54 @@
+body 
+	font-family: Roboto, Arial, sans-serif 
+	margin: 0 
+.basic-container 
+	padding: 5px 
+.version-info 
+	font-size: 8pt 
+	float: right 
+
+.app-name
+	padding-top:7px
+.center
+	display: flex
+	width: auto
+	flex-direction: row
+	justify-content: center
+	align-content: center
+.container 
+	height: 93vh
+.sidenav-content 
+	display: flex 
+	height: 100%
+	flex-direction: row
+	@media (min-width: 453px) and (max-width: 768px)
+		flex-direction: column
+
+.sidenav 
+	user-select: none 
+.full-width 
+	width: 100% 
+.fix-text
+	padding-left: 10px
+
+.menu-button 
+	padding-left: 5px
+	transition: 300ms ease-in-out 
+	transform: rotate(0deg) 
+	&.rotated 
+		transform: rotate(180deg) 
+.submenu 
+	overflow-y: hidden 
+	transition: transform 300ms ease 
+	transform: scaleY(0) 
+	transform-origin: top 
+	padding-left: 30px 
+	&.expanded 
+		transform: scaleY(1) 
+.example-card 
+	max-width: 400px
+	max-height: 530px
+	margin: 40px
+.example-header-image 
+	background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg') 
+	background-size: cover 
