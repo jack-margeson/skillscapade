@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
   AngularFirestore,
-  AngularFirestoreDocument,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { Observable, take } from 'rxjs';
@@ -26,13 +25,38 @@ export class DatabaseService {
       .valueChanges()
       .pipe(take(1))
       .subscribe((queryResults) => {
-        console.log(queryResults);
         if (queryResults.length == 0) {
-          this.usersCollection.add({
+          this.usersCollection.doc(uid).set({
             uid: uid,
             prefered_name: prefered_name,
             points: 0,
           });
+        }
+      });
+  }
+
+  modifyPoints(uid: string | undefined, points: number) {
+    this.angularFirestore
+      .collection('users', (ref) => ref.where('uid', '==', uid))
+      .valueChanges()
+      .pipe(take(1))
+      .subscribe((queryResults: any) => {
+        if (queryResults.length != 0) {
+          this.usersCollection
+            .doc(uid)
+            .update({ points: parseInt(queryResults[0].points) + points });
+        }
+      });
+  }
+
+  modifyPreferedName(uid: string | undefined, displayName: string) {
+    this.angularFirestore
+      .collection('users', (ref) => ref.where('uid', '==', uid))
+      .valueChanges()
+      .pipe(take(1))
+      .subscribe((queryResults: any) => {
+        if (queryResults.length != 0) {
+          this.usersCollection.doc(uid).update({ preferred_name: displayName });
         }
       });
   }

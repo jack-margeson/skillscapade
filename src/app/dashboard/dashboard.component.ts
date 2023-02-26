@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
 import { AuthenticationService } from '../authentication.service';
-import firebase from 'firebase/compat/app';
 import { DatabaseService } from '../database.service';
 
 @Component({
@@ -10,7 +8,8 @@ import { DatabaseService } from '../database.service';
   styleUrls: ['./dashboard.component.sass'],
 })
 export class DashboardComponent implements OnInit {
-  displayName: string | null | undefined;
+  userUID: string | undefined;
+  userDisplayName: string | null | undefined;
   userPoints: number | null | undefined;
 
   constructor(
@@ -18,10 +17,11 @@ export class DashboardComponent implements OnInit {
     private databaseService: DatabaseService
   ) {
     this.authenticationService.auth.user.subscribe((user) => {
+      this.userUID = user?.uid;
       this.databaseService
         .getUserDataObservable(user?.uid)
         .subscribe((data: any) => {
-          this.displayName = data.prefered_name;
+          this.userDisplayName = data.prefered_name;
           this.userPoints = data.points;
         });
     });
@@ -31,5 +31,9 @@ export class DashboardComponent implements OnInit {
 
   logout() {
     this.authenticationService.logout();
+  }
+
+  modifyPoints(points: number): void {
+    this.databaseService.modifyPoints(this.userUID, points);
   }
 }

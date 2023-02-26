@@ -1,8 +1,13 @@
 <router-outlet>
   <p>Dashboard</p>
 
-  <p>Welcome, {{ this.displayName }}!</p>
-  <p>{{ this.displayName }}'s points: {{ this.userPoints }}</p>
+  <p>Welcome, {{ this.userDisplayName }}!</p>
+  <p>{{ this.userDisplayName }}'s points: {{ this.userPoints }}</p>
+
+  <button (click)="modifyPoints(5)" mat-fab extended>
+    <mat-icon>logout</mat-icon>
+    Modify points
+  </button>
 
   <button (click)="logout()" mat-fab extended>
     <mat-icon>logout</mat-icon>
