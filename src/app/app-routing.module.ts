@@ -9,6 +9,7 @@ import {
   redirectLoggedInTo,
 } from '@angular/fire/compat/auth-guard';
 import { LoginComponent } from './login/login.component';
+import { TractComponent } from './tract/tract.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
@@ -29,6 +30,7 @@ const routes: Routes = [
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectLoggedInToDashboard },
   },
+  { path: 'tract', component: TractComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

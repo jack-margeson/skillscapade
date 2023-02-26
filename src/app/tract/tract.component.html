@@ -1,0 +1,31 @@
+<router-outlet>
+  <!-- <p>Skillscapade home</p> -->
+  <div>
+    <mat-toolbar color="primary">
+      <span>Skillscapade</span>
+    </mat-toolbar>
+  </div>
+  <div class="" style="margin: 40px">
+    <span class="title" style="font-size: 30px">{{ tract[0].title }}</span>
+
+    <mat-radio-group
+      *ngFor="let question of tract[0].questions; index as i"
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+    >
+      {{ question.question }}
+      <mat-radio-button
+        class="example-radio-button"
+        *ngFor="let choice of tract[0].questions[i].choices"
+        [value]="choice"
+      >
+        {{ choice }}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <button (click)="submit()" mat-fab extended style="max-width: 400px">
+      <mat-icon>send</mat-icon>
+      Submit (worth 100 points)
+    </button>
+  </div>
+</router-outlet>

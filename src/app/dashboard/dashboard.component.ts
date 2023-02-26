@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { DatabaseService } from '../database.service';
 
@@ -26,7 +27,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private databaseService: DatabaseService
+    private databaseService: DatabaseService,
+    private router: Router
   ) {
     this.authenticationService.auth.user.subscribe((user) => {
       this.userUID = user?.uid;
@@ -75,5 +77,9 @@ export class DashboardComponent implements OnInit {
       this.isDashboard = false;
       this.isProfile = true;
     }
+  }
+
+  openTract(tract: any) {
+    this.router.navigateByUrl('tract?id=' + tract.id.trim());
   }
 }

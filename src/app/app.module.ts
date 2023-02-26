@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatListModule } from '@angular/material/list';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -18,9 +19,16 @@ import { HomeComponent } from './home/home.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
+import { TractComponent } from './tract/tract.component';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, HomeComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    HomeComponent,
+    LoginComponent,
+    TractComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,6 +42,7 @@ import { LoginComponent } from './login/login.component';
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
+    MatRadioModule,
     AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [],

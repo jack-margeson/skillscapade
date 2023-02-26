@@ -73,4 +73,10 @@ export class DatabaseService {
   getTractsObservable(): Observable<Object> {
     return this.angularFirestore.collection('tracts').valueChanges();
   }
+
+  getTractObservable(id: string | null): Observable<Object> {
+    return this.angularFirestore
+      .collection('tracts', (ref) => ref.where('id', '==', id))
+      .valueChanges();
+  }
 }
